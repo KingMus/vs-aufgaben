@@ -1,7 +1,7 @@
 package main;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Clock {
 
