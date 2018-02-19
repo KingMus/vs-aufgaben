@@ -14,7 +14,7 @@ public class Clock {
 	}
 	
 	public static String time() {
-		return dateFormatter.format(new Date());
+		return timeFormatter.format(new Date());
 	}
 	
 	
