@@ -17,7 +17,7 @@ public class TimeService {
 		// TODO Aufgabe umsetzen
 
 		try {
-			ServerSocket ssocket = new ServerSocket(75);
+			ServerSocket ssocket = new ServerSocket(8080);
 			Socket socket = ssocket.accept();//new Socket("127.0.0.1", 75);
 
 			OutputStream output = socket.getOutputStream();
@@ -38,9 +38,13 @@ public class TimeService {
 					switch (eingabe) {
 					case "date":
 						writer.write(Clock.date());
+						writer.newLine();
+						writer.flush();
 						break;
 					case "time":
 						writer.write(Clock.time());
+						writer.newLine();
+						writer.flush();
 						break;
 					default:
 						socket.close();
