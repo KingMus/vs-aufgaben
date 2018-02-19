@@ -17,15 +17,16 @@ public class TimeService {
 		// TODO Aufgabe umsetzen
 
 		try {
-			ServerSocket ssocket = new ServerSocket(8080);
-			Socket socket = ssocket.accept();//new Socket("127.0.0.1", 75);
+			ServerSocket serverSocket = new ServerSocket(8080);
+			Socket socket = serverSocket.accept();//new Socket("127.0.0.1", 75);
 
 			OutputStream output = socket.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
 			InputStream input = socket.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-			writer.write("time service \n");
+			writer.write("time service");
+			writer.newLine();
 			writer.flush();
 
 			while (!socket.isClosed()) {
