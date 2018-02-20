@@ -1,15 +1,18 @@
-package main;
+package server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import tools.Clock;
+import tools.IOController;
+
 public class TimeService extends Thread {
 
-	private IOFactory ioFactory;
+	private IOController ioController;
 
 	public TimeService(ServerSocket serverSocket) throws IOException {
 
-		ioFactory = new IOFactory(serverSocket);
+		ioController = new IOController(serverSocket);
 	}
 
 	public void run() {
@@ -18,18 +21,18 @@ public class TimeService extends Thread {
 			do {
 				switch (userInput) {
 				case "date":
-					ioFactory.getWriter().write(Clock.date());
+					ioController.getWriter().write(Clock.date());
 					break;
 				case "time":
-					ioFactory.getWriter().write(Clock.time());
+					ioController.getWriter().write(Clock.time());
 					break;
 				default:
 					userInput = "exit";
 					break;
 				}
-				ioFactory.getWriter().newLine();
-				ioFactory.getWriter().flush();
-				userInput = ioFactory.getReader().readLine();
+				ioController.getWriter().newLine();
+				ioController.getWriter().flush();
+				userInput = ioController.getReader().readLine();
 			} while (!(userInput == null || userInput.equals("exit")));
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,7 +1,9 @@
-package main;
+package client;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+
+import tools.IOController;
 
 public class TimeServiceClient {
 
@@ -15,14 +17,14 @@ public class TimeServiceClient {
 
 	private static String interactWithOrder(String ip, String order) throws IOException {
 
-		IOFactory ioFactory = new IOFactory(ip);
+		IOController ioController = new IOController(ip);
 
-		ioFactory.getReader().readLine();
-		ioFactory.getWriter().write(order);
-		ioFactory.getWriter().newLine();
-		ioFactory.getWriter().flush();
-		String ausgabe = ioFactory.getReader().readLine();
-		System.out.println(ausgabe);
+		ioController.getReader().readLine();
+		ioController.getWriter().write(order);
+		ioController.getWriter().newLine();
+		ioController.getWriter().flush();
+
+		String ausgabe = ioController.getReader().readLine();
 		return ausgabe;
 	}
 }

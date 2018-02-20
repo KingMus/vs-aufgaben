@@ -1,4 +1,4 @@
-package main;
+package tools;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class IOFactory {
+public class IOController {
 
 	private OutputStream output;
 	private BufferedWriter writer;
@@ -18,13 +18,13 @@ public class IOFactory {
 	private BufferedReader reader;
 	private Socket socket;
 
-	public IOFactory(ServerSocket serverSocket) throws IOException {
+	public IOController(ServerSocket serverSocket) throws IOException {
 		socket = serverSocket.accept();
 		initalizeIO();
 
 	}
 
-	public IOFactory(String ip) throws IOException {
+	public IOController(String ip) throws IOException {
 		socket = new Socket(ip, 8080);
 		initalizeIO();
 
