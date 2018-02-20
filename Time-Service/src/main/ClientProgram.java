@@ -9,7 +9,7 @@ public class ClientProgram {
 
 		System.out.println(TimeServiceClient.dateFromServer("127.0.0.1"));
 		System.out.println(TimeServiceClient.timeFromServer("127.0.0.1"));
-		
+
 	}
 
 }
