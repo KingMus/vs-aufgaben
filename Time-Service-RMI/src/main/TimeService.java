@@ -11,8 +11,11 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 
 	public Date getDateAndTime() throws RemoteException {
 
-		System.out.println("Well done");
-		return null;
+		System.out.println("success");
+
+		Date date = new Date();
+
+		return date;
 
 	}
 
