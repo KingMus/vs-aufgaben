@@ -9,59 +9,45 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-public class TimeService {
+public class TimeService extends Thread {
 
-	public static void main(String[] args) {
-		// TODO Aufgabe umsetzen
+	private OutputStream output;
+	private BufferedWriter writer;
+	private InputStream input;
+	private BufferedReader reader;
+	private Socket socket;
 
+	public TimeService(ServerSocket serverSocket) throws IOException {
+		socket = serverSocket.accept();
+		output = socket.getOutputStream();
+		writer = new BufferedWriter(new OutputStreamWriter(output));
+		input = socket.getInputStream();
+		reader = new BufferedReader(new InputStreamReader(input));
+	}
+
+	public void run() {
+		String eingabe = "";
 		try {
-			ServerSocket serverSocket = new ServerSocket(8080);
-			Socket socket = serverSocket.accept();//new Socket("127.0.0.1", 75);
-
-			OutputStream output = socket.getOutputStream();
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
-			InputStream input = socket.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
-			writer.write("time service");
-			writer.newLine();
-			writer.flush();
-
-			while (!socket.isClosed()) {
-			
-				String eingabe = reader.readLine();
-
-				if (eingabe == null) {
-					socket.close();
-				} else {
-					switch (eingabe) {
-					case "date":
-						writer.write(Clock.date());
-						writer.newLine();
-						writer.flush();
-						break;
-					case "time":
-						writer.write(Clock.time());
-						writer.newLine();
-						writer.flush();
-						break;
-					default:
-						socket.close();
-						break;
-					}
+			do {
+				switch (eingabe) {
+				case "date":
+					writer.write(Clock.date());
+					break;
+				case "time":
+					writer.write(Clock.time());
+					break;
+				default:
+					eingabe = "exit";
+					break;
 				}
-			}
-
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				writer.newLine();
+				writer.flush();
+				eingabe = reader.readLine();
+			} while (!(eingabe == null || eingabe.equals("exit")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }

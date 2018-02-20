@@ -12,41 +12,39 @@ import java.net.UnknownHostException;
 
 public class TimeServiceClient {
 
-	public String dateFromServer(String ip) throws UnknownHostException, IOException {
+	public static String dateFromServer(String ip) throws UnknownHostException, IOException {
 
 		Socket socket = new Socket(ip, 8080);
-
 		OutputStream output = socket.getOutputStream();
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
 		InputStream input = socket.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
+		reader.readLine();
 		writer.write("date");
 		writer.newLine();
 		writer.flush();
+		String ausgabe = reader.readLine();
+		System.out.println(ausgabe);
+		return ausgabe;
 
-		while (!socket.isClosed()) {
-			String ausgabe = reader.readLine();
-			System.out.println(ausgabe);
-			return ausgabe;
-		}
-
-		return "";
 	}
 
-	public String timeFromServer(String ip) throws UnknownHostException, IOException {
+	public static String timeFromServer(String ip) throws UnknownHostException, IOException {
 
 		Socket socket = new Socket(ip, 8080);
-
 		OutputStream output = socket.getOutputStream();
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
 		InputStream input = socket.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
+		reader.readLine();
 		writer.write("time");
+		writer.newLine();
 		writer.flush();
-
-		return reader.readLine();
+		String ausgabe = reader.readLine();
+		System.out.println(ausgabe);
+		return ausgabe;
 
 	}
 
