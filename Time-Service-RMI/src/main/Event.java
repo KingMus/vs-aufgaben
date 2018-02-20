@@ -1,5 +1,7 @@
 package main;
 
-public class Event {
+import java.util.Date;
+
+public class Event extends Date {
 
 }
