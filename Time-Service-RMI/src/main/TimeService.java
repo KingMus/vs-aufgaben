@@ -8,6 +8,7 @@ import java.util.Vector;
 public class TimeService extends UnicastRemoteObject implements TimeServiceInterface {
 
 	private Vector<Event> allEvents = new Vector<Event>();
+	private Vector<EventListener> allEventListener = new Vector<EventListener>();
 
 	protected TimeService() throws RemoteException {
 	}
@@ -57,6 +58,20 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 		}
 
 		return allFutureEvents;
+	}
+
+	@Override
+	public void addEventListener(EventListener eventListener) throws RemoteException {
+
+		allEventListener.addElement(eventListener);
+
+	}
+
+	@Override
+	public void removeEventListener(EventListener eventListener) throws RemoteException {
+
+		allEventListener.remove(eventListener);
+
 	}
 
 }
