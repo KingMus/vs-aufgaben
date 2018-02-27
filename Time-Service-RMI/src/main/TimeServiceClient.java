@@ -14,6 +14,12 @@ public class TimeServiceClient {
 		Date date = timeServiceInterface.getDateAndTime();
 
 		System.out.println(date.toString());
+		
+		timeServiceInterface.addEvent(new Event(date, "wow"));
+		
+		System.out.println(timeServiceInterface.getAllEvents().get(0).getEventName());
+		
+		
 
 	}
 

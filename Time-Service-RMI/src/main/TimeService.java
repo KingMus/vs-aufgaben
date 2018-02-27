@@ -12,19 +12,19 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 
 	protected TimeService() throws RemoteException, InterruptedException {
 
-		Thread thread = new Thread();
+//		Thread thread = new Thread();
 
-		thread.start();
+//		thread.start();
 
-		while (thread.isAlive()) {
+//		while (thread.isAlive()) {
 
-			Date date = new Date();
+//			Date date = new Date();
 
-			long timeTillNextEvent = allEvents.get(0).getTime() - date.getTime();
-			allEvents.remove(0);
-			Thread.sleep(timeTillNextEvent);
+//			long timeTillNextEvent = allEvents.get(0).getTime() - date.getTime();
+//			allEvents.remove(0);
+//			Thread.sleep(timeTillNextEvent);
 
-		}
+//		}
 
 	}
 
@@ -52,7 +52,7 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 		Date date = new Date();
 
 		for (Event event : allEvents) {
-			if (date.getTime() < event.getTime()) {
+			if (date.getTime() < event.getDate().getTime()) {
 				return event;
 			}
 		}
@@ -67,7 +67,7 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 		Vector<Event> allFutureEvents = new Vector<Event>();
 
 		for (Event event : allEvents) {
-			if (date.getTime() < event.getTime()) {
+			if (date.getTime() < event.getDate().getTime()) {
 				allFutureEvents.addElement(event);
 			}
 		}
