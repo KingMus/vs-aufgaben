@@ -8,6 +8,8 @@ import java.util.Vector;
 public interface TimeServiceInterface extends Remote {
 
 	public abstract Date getDateAndTime() throws RemoteException;
+	
+	public abstract void startThread() throws RemoteException, InterruptedException;
 
 	public abstract void addEvent(Event event) throws RemoteException;
 

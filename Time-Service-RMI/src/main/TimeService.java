@@ -10,21 +10,7 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 	private Vector<Event> allEvents = new Vector<Event>();
 	private Vector<EventListener> allEventListener = new Vector<EventListener>();
 
-	protected TimeService() throws RemoteException, InterruptedException {
-
-//		Thread thread = new Thread();
-
-//		thread.start();
-
-//		while (thread.isAlive()) {
-
-//			Date date = new Date();
-
-//			long timeTillNextEvent = allEvents.get(0).getTime() - date.getTime();
-//			allEvents.remove(0);
-//			Thread.sleep(timeTillNextEvent);
-
-//		}
+	protected TimeService() throws RemoteException {
 
 	}
 
@@ -86,6 +72,29 @@ public class TimeService extends UnicastRemoteObject implements TimeServiceInter
 	public void removeEventListener(EventListener eventListener) throws RemoteException {
 
 		allEventListener.remove(eventListener);
+
+	}
+
+	@Override
+	public void startThread() throws RemoteException, InterruptedException {
+
+		Thread thread = new Thread();
+		thread.start();
+
+		while (thread.isAlive()) {
+
+			Date date = new Date();
+
+			long timeTillNextEvent = allEvents.get(0).getDate().getTime() - date.getTime();
+			allEvents.remove(0);
+			
+			System.out.println("Removed");
+
+			Thread.sleep(timeTillNextEvent);
+
+			System.out.println("Es ist 11:47");
+
+		}
 
 	}
 
